@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.URL;
+import java.util.Timer;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -21,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import com.hcy.jimweb.manager.MyX509TrustManager;
 import com.hcy.jimweb.pojo.AccessToken;
 import com.hcy.jimweb.pojo.Menu;
+import com.hcy.jimweb.pojo.consts.Constant;
 
 public class WeixinUtil {
 
@@ -200,5 +202,13 @@ public class WeixinUtil {
       
         return result;  
     } 
+    
+    /**
+     * 执行定时任务，获取access_token
+     */
+    public static void startTimeJob() {
+        Timer timer = new Timer();  
+        timer.schedule(new MyTimerTask(), Constant.delay, Constant.period); 
+    }
 
 }
